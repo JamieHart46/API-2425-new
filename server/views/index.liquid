@@ -4,11 +4,45 @@
 
 <h1 class="h1">{{ title }}</h1>
 
-<ul class="grid">
-  {% for item in items %}
+<label>wedstrijden van vandaag</label>
+<ul class="opkomendeWedstrijden">
+  {% for events in matchesData %}
+    <li class="wedstrijden">
+      <p ><img src="{{ events.strHomeTeamBadge }}">{{ events.strHomeTeam }} vs {{ events.strAwayTeam }} <img src="{{ events.strAwayTeamBadge }}"></p>
+      <p> {{ events.strTime }} </p> 
+      <img src="{{ events.strLeagueBadge }}" id="leagueBadge">
+    </li>
+  {% endfor %}
+</ul>
+
+<label>Eredivisie</label>
+<ul class="comp1">
+  {% for team in eredivisieData.teams %}
+    <li class="teams">
+      <a href="/team/{{ team.strTeam | replace: " ", "_"   }}">
+       <img src="{{ team.strBadge }}">
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+
+<label>Premier League</label>
+<ul class="comp2">
+  {% for team in BplData.teams %}
     <li>
-      <a href="/plant/{{ item.id }}">
-        {% render 'server/components/card/card.liquid', item: item %}
+      <a href="/team/{{ team.strTeam | replace: " ", "_"   }}">
+      <img src="{{ team.strBadge }}">
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+
+<label>Champions League</label>
+<ul class="comp3">
+  {% for team in ChampionsLeagueData.teams %}
+    <li>
+      <a href="/team/{{ team.strTeam | replace: " ", "_"   }}">
+      <img src="{{ team.strBadge }}">
       </a>
     </li>
   {% endfor %}

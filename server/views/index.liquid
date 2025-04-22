@@ -2,32 +2,41 @@
 
 {% block content %}
 
-<h1 class="h1">{{ title }}</h1>
+<main>
+<section>
 
-<label>wedstrijden van vandaag</label>
-<ul class="opkomendeWedstrijden">
-  {% for events in matchesData %}
-    <li class="wedstrijden">
-      <p ><img src="{{ events.strHomeTeamBadge }}">{{ events.strHomeTeam }} vs {{ events.strAwayTeam }} <img src="{{ events.strAwayTeamBadge }}"></p>
-      <p> {{ events.strTime }} </p> 
-      <img src="{{ events.strLeagueBadge }}" id="leagueBadge">
-    </li>
-  {% endfor %}
-</ul>
+<label class="teamListLabel">Wedstrijden van vandaag</label>
+{% for events in matchesData %}
+   <div class="resultDisplay">    
+    <img src="{{events.strHomeTeamBadge}}">
+      <ul class="opkomendeWedstrijden" >
+        <li> {{ events.strHomeTeam }} vs {{ events.strAwayTeam }} </li>
+        <li> {{events.strTime}}</li>
+        <li><img src="{{events.strLeagueBadge}}" id="leagueBadge">
+      </ul>
+      <img src="{{events.strAwayTeamBadge}}">
+  </div>
+{% endfor %}
 
-<label>Eredivisie</label>
-<ul class="comp1">
+
+<h2>{{ title }}</h2>
+<div>
+ <label id="leagueTarget" class="teamListLabel">Eredivisie</label>
+<ul class="teamList">
   {% for team in eredivisieData.teams %}
     <li class="teams">
-      <a href="/team/{{ team.strTeam | replace: " ", "_"   }}">
-       <img src="{{ team.strBadge }}">
+      <a class="clubs" href="/team/{{ team.strTeam | replace: " ", "_" }}" onclick="navigateWithTransition(event)">
+       <img src="{{ team.strBadge }}" view-transition-name="{{ team.strTeam | replace: " ", "-" }}">
       </a>
     </li>
   {% endfor %}
 </ul>
+</div>
 
-<label>Premier League</label>
-<ul class="comp2">
+<div>
+
+<label class="teamListLabel">Premier League</label>
+<ul class="teamList">
   {% for team in BplData.teams %}
     <li>
       <a href="/team/{{ team.strTeam | replace: " ", "_"   }}">
@@ -36,9 +45,11 @@
     </li>
   {% endfor %}
 </ul>
+</div>
 
-<label>Champions League</label>
-<ul class="comp3">
+<div>
+<label class="teamListLabel">Champions League</label>
+<ul class="teamList">
   {% for team in ChampionsLeagueData.teams %}
     <li>
       <a href="/team/{{ team.strTeam | replace: " ", "_"   }}">
@@ -47,5 +58,21 @@
     </li>
   {% endfor %}
 </ul>
+</div>
 
+<div>
+
+ <label class="teamListLabel">Europa League</label> 
+<ul class="teamList">
+  {% for team in EuropaLeagueData.teams %}
+    <li>
+      <a href="/team/{{ team.strTeam | replace: " ", "_"   }}">
+      <img src="{{ team.strBadge }}">
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+</div>
+</section>
+</main>
 {% endblock %}

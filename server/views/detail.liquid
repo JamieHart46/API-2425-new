@@ -1,19 +1,55 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
+<body id="" style="background-image: url('{{ randomBackgroundImage }}'); background-position: center; background-size:100vw; background-repeat= no-repeat;">
 <main>
   <section>
-   <div class="titel"
-   style="background-color: {{ backgroundColour1 }};"> 
-    <img src="{{ team.strBadge }}">
+   <div class="titel" style="background-color: {{ backgroundColour1 }};"> 
+    <img src="{{ team.strBadge }}" view-transition-name="{{ team.strTeam | replace: " ", "-" }}">
     <h2><strong>{{ team.strTeam }}</strong></h2>  
    </div>
 
-   <ul style="background-color: {{ backgroundColour2 }};">
-    <li></li>
-   </ul>
+   <label style="background-color: {{ backgroundColour2 }};">Volgende wedstrijden</label>
+   <div class="resultDisplay">    
+    <img src="{{nextGame.strHomeTeamBadge}}">
+      <ul class="opkomendeWedstrijden" >
+        <li> {{ nextGame.strHomeTeam }} vs {{ nextGame.strAwayTeam }} </li>
+        <li> {{nextGame.strTime}}  {{nextGame.dateEvent}} </li>
+        <li><img src="{{nextGame.strLeagueBadge}}" id="leagueBadge">
+      </ul>
+      <img src="{{nextGame.strAwayTeamBadge}}">
+  </div>
 
+
+   <label style="background-color: {{ backgroundColour2 }};">Vorige resultaten</label>
+   {% for game in lastFiveGames %}
+   <div class="resultDisplay">    
+      <img src="{{game.strHomeTeamBadge}}">
+      <ul class="opkomendeWedstrijden">
+        <li> {{ game.strHomeTeam }} vs {{ game.strAwayTeam }} </li>
+        <li> {{game.intHomeScore}} - {{game.intAwayScore}} </li>
+        <li><img src="{{game.strLeagueBadge}}" id="leagueBadge"></li>
+      </ul>
+      <img src="{{game.strAwayTeamBadge}}">
+        
+  </div>
+
+  
+{% endfor %}
+
+<label class="statLabel" style="background-color: {{ backgroundColour2 }};">Stats laatste 5 wedstrijden</label>
+<div id="statsLaatsteFive">
+    <ul id="statsList">
+      <li class="stats"> Aantal gescoorde doelpunten: {{ gescoordeGoals }}</li>
+      <li class="stats"> Aantal doelpunten tegen: {{ gescoordeTegenGoals  }}</li>
+      <li class="stats"> Gewonnen: {{ gewonnenGames }} </li>
+      <li class="stats"> Gelijkspel: {{ gelijkSpelGames }} </li>
+      <li class="stats"> Verloren: {{ verlorenGames }} </li>
+    </ul>
+    
+  </div>
   </section>
  
 </main>
+</body>
 {% endblock %}

@@ -54,9 +54,12 @@ app
 
       // Filteren op de wedstrijden van de belangrijke competities
       const displayedLeagues = ['Dutch Eredivisie', 'English Premier League','Spanish La Liga','Italian Serie A','German Bundesliga', 'UEFA Champions League', 'UEFA Europa League'];
-      const filteredMatches = matchesData.events.filter(events => {
-    return displayedLeagues.includes(events.strLeague);
-});
+      const filteredMatches = matchesData.events.filter(events =>
+        events?.strLeague && displayedLeagues.includes(events.strLeague)
+      );
+
+// console.log(matchesData.events)
+// console.log(Array.isArray(matchesData.events));
 
 
    return res.send(renderTemplate('server/views/index.liquid', 

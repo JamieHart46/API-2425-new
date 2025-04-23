@@ -1,5 +1,9 @@
 import './index.css';
 
+document.querySelectorAll('a.clubs').forEach(link => {
+    link.addEventListener('click', navigateWithTransition);
+});
+
 // Class geven aan img voor View transition
 function navigateWithTransition(event) {
     event.preventDefault();
@@ -9,27 +13,27 @@ function navigateWithTransition(event) {
 
     console.log('Clicked image:', img);
   
-    // Remove the class from all other images
+    //
     document.querySelectorAll('.teamBadge').forEach(el => {
       el.classList.remove('teamBadge');
     });
   
-    // Add the class to the clicked image
+    // 
     if (img) {
       img.classList.add('teamBadge');
     }
   
-    // Wait for the class to be added before navigating
+    // 
     new Promise((resolve) => {
-      // Check if the class is added
+      // 
       const checkClass = setInterval(() => {
         if (img && img.classList.contains('teamBadge')) {
-          clearInterval(checkClass); // Stop checking
-          resolve(); // Resolve the promise
+          clearInterval(checkClass); // 
+          resolve(); // 
         }
-      }, 10); // Check every 10ms
+      }, 10); // 
     }).then(() => {
-      // Trigger the transition after the class is added
+      // 
       document.startViewTransition(() => {
         window.location.href = link.href;
       });

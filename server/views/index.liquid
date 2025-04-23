@@ -23,19 +23,19 @@
 <div>
  <label id="leagueTarget" class="teamListLabel">Eredivisie</label>
 <ul class="teamList">
-  {% comment %} {% for team in eredivisieData.teams %}
+  {% for team in eredivisieData.teams %}
     <li class="teams">
-      <a class="clubs" href="/team/{{ team.strTeam | replace: " ", "_" }}" onclick="navigateWithTransition(event)">
+      <a class="clubs" href="/team/{{ team.strTeam | replace: " ", "_" }}">
        <img src="{{ team.strBadge }}">
       </a>
     </li>
-  {% endfor %} {% endcomment %}
+  {% endfor %}
 
-  <li class="teams">
+  {% comment %} <li class="teams">
       <a href="/team/PSV_Eindhoven" onclick="navigateWithTransition(event)">
        <img src="https://r2.thesportsdb.com/images/media/team/badge/xfsz6i1721297428.png">
       </a>
-    </li>
+    </li> {% endcomment %}
 </ul>
 </div>
 

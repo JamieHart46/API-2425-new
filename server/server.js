@@ -15,6 +15,8 @@ app
   .use('/', sirv('dist'))
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
 
+
+  // Data ophalen van de competities uit de API. Eerste met hulp van Cyd, rest zelf.
   app.get('/', async (req, res) => {
     const eredivisie = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=Dutch%20Eredivisie')
     const eredivisieData = await eredivisie.json()
@@ -37,15 +39,20 @@ app
     const EuropaLeague = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=UEFA%20Europa%20League')
     const EuropaLeagueData = await EuropaLeague.json()  
 
+
+    // Instellen om de wedstrijden met strDate gelijk aan dag van vandaag te filteren en te tonen op de index.liquid.
+    // Met Chat
     const today = new Date();
       const year = today.getFullYear();
       const month = String(today.getMonth() + 1).padStart(2, '0');
       const day = String(today.getDate()).padStart(2, '0');
       const currentDate = `${year}-${month}-${day}`;
 
+      // Wedstrijden van vandaag ophalen
       const matchesResponse = await fetch(`https://www.thesportsdb.com/api/v1/json/690867/eventsday.php?d=${currentDate}&s=Soccer`);
       const matchesData = await matchesResponse.json();
 
+      // Filteren op de wedstrijden van de belangrijke competities
       const displayedLeagues = ['Dutch Eredivisie', 'English Premier League','Spanish La Liga','Italian Serie A','German Bundesliga', 'UEFA Champions League', 'UEFA Europa League'];
       const filteredMatches = matchesData.events.filter(events => {
     return displayedLeagues.includes(events.strLeague);
@@ -70,9 +77,12 @@ app
     const teamName = req.params.strTeam;
     const team = await fetch('https://www.thesportsdb.com/api/v1/json/690867/searchteams.php?t=' + teamName);
     const teamData = await team.json();
+
+    // Primaire en secundaire kleuren van het team ophalen om te gebruiken voor de styling van de pagina.
     const backgroundColour1 = teamData.teams[0].strColour1;
     const backgroundColour2 = teamData.teams[0].strColour2;
 
+    // Zelfde als de kleuren maar met de achtergronden.
     const backgroundImages = [
     teamData.teams[0].strFanart1,
     teamData.teams[0].strFanart2,
@@ -80,26 +90,42 @@ app
     teamData.teams[0].strFanart4
     ];
 
+    // Randomizen van de afbeeldingen bij laden van de pagina, met hulp van chat
     const validBackgroundImages = backgroundImages.filter(image => image);
     const randomBackgroundImage = validBackgroundImages[Math.floor(Math.random() * validBackgroundImages.length)];
 
     // console.log(randomBackgroundImage);
 
+    // Data ophalen van de stand van de competitie, met het ID uit de teamData
     const leagueStandings = await fetch(`https://www.thesportsdb.com/api/v1/json/690867/lookuptable.php?l=${teamData.teams[0].idLeague}&s=2024-2025`);
     const leagueStandingsData = await leagueStandings.json()
 
-    // console.log(teamData.teams[0].idLeague)
-    
+    // console.log(leagueStandingsData)
 
+
+    // Ophalen welke team in de table gelijk is aan de strTeam van de pagina om deze in liquid een andere kleur te geven.
+    leagueStandingsData.table = leagueStandingsData.table.map((table) => {
+      if (table.strTeam === teamData.teams[0].strTeam) {
+        return {
+          ...table,
+          isCurrentTeam: true, 
+        };
+      }
+      return table;
+    });
+
+
+    // Ophalen eerst volgende wedstrijd van het team op de pagina.
     const nextGame = await fetch('https://www.thesportsdb.com/api/v1/json/690867/eventsnext.php?id=' + teamData.teams[0].idTeam);
     const nextGameData = await nextGame.json(); 
 
+    // Laatste 5 resultaten van het team.
     const playedMatches = await fetch('https://www.thesportsdb.com/api/v1/json/690867/eventslast.php?id=' + teamData.teams[0].idTeam);
     const playedMatchesData = await playedMatches.json();
-
     const lastFiveGames = playedMatchesData.results.slice(0, 5);
 
 
+    // Data statistieken laatste 5 wedstrijden, met behulp van Cyd.
     let gescoordeGoals = 0;
     let gescoordeTegenGoals = 0;
     lastFiveGames.forEach(game => {
@@ -126,6 +152,8 @@ app
       };
     });
 
+
+    // Data van de uitslagen van Wedstrijden.
     let gewonnenGames = 0;
     let gelijkSpelGames = 0;
     let verlorenGames = 0;
@@ -161,7 +189,7 @@ app
         gewonnenGames: gewonnenGames,
         gelijkSpelGames: gelijkSpelGames,
         verlorenGames: verlorenGames,
-        leagueStandings: leagueStandingsData, 
+        leagueStandingsData: leagueStandingsData, 
      })
     );
   });

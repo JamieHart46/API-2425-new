@@ -1,7 +1,8 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
-<body id="" style="background-image: url('{{ randomBackgroundImage }}'); background-position: center; background-size:100vw; background-repeat= no-repeat;">
+<body id="" style="background-image: url('{{ randomBackgroundImage }}'); background-position: center; background-size:100vw; box-shadow: inset 0 0 0 1000px rgba(0,0,0,.3)";>
+  {% comment %} Idee van Mike overgenomen om bij herladen van de pagina steeds een nieuwe achtergrond te laten zien, met randomBackgroundImage {% endcomment %}
   <canvas id="footballRain"></canvas>
 <main>
   <section>
@@ -44,8 +45,9 @@
 {% endfor %}
 
 <label class="statLabel" style="background-color: {{ backgroundColour2 }};">Stats laatste 5 wedstrijden</label>
-<div id="statsLaatsteFive">
+<div class="statsLaatsteFive">
     <ul id="statsList">
+      <li class="stats"> Statistieken laatste vijf wedstrijden </li>
       <li class="stats"> Aantal gescoorde doelpunten: </li>
       <li class="stats"> Aantal doelpunten tegen:  </li>
       <li class="stats"> Gewonnen:  </li>
@@ -54,19 +56,34 @@
     </ul>
 
     <ul id="statsList">
-      <li class="stats"> {{ gescoordeGoals }}</li>
+      <li class="stats" style="visibility: hidden;">#</li>
+      <li class="stats" id="scored"> {{ gescoordeGoals }}</li>
       <li class="stats"> {{ gescoordeTegenGoals  }}</li>
       <li class="stats"> {{ gewonnenGames }} </li>
       <li class="stats">{{ gelijkSpelGames }} </li>
       <li class="stats"> {{ verlorenGames }} </li>
     </ul>
+  </div>
+
+
+  <div class="statsLaatsteFive">
+    <ol class="leagueStanding">
+  <li class="stats"> Competitie stand: {{ strLeague }} </li>
+  {% for table in leagueStandingsData.table %}
+    <li class="stand" 
+        style="background-color: {% if table.isCurrentTeam %}rgb(51, 204, 51, 0.7){% else %}transparent{% endif %}; 
+               font-weight: {% if table.isCurrentTeam %}bold{% else %}normal{% endif %};">
+      {{ table.intRank }} {{ table.strTeam }}
+    </li>
+  {% endfor %}
+</ol>
 
     <ol class="leagueStanding">
-      {% for team in leagueStandingData.teams %}
-      <li> {{ team.strTeam }} </li>
+      <li class="stats">Punten</li>
+      {% for table in leagueStandingsData.table %}
+      <li class="stand"> - {{ table.intPoints }} </li>
       {% endfor %}
     </ol>
-    
   </div>
   </section>
  

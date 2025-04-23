@@ -5,6 +5,7 @@ document.querySelectorAll('a.clubs').forEach(link => {
 });
 
 // Class geven aan img voor View transition
+// met behulp van Sanne, Mike en Chat
 function navigateWithTransition(event) {
     event.preventDefault();
   
@@ -13,43 +14,45 @@ function navigateWithTransition(event) {
 
     console.log('Clicked image:', img);
   
-    //
     document.querySelectorAll('.teamBadge').forEach(el => {
       el.classList.remove('teamBadge');
     });
   
-    // 
     if (img) {
       img.classList.add('teamBadge');
     }
   
-    // 
     new Promise((resolve) => {
-      // 
       const checkClass = setInterval(() => {
         if (img && img.classList.contains('teamBadge')) {
-          clearInterval(checkClass); // 
-          resolve(); // 
+          clearInterval(checkClass); 
+          resolve(); 
         }
-      }, 10); // 
+      }, 10); 
     }).then(() => {
-      // 
       document.startViewTransition(() => {
         window.location.href = link.href;
       });
     });
   }
+  //https://developer.chrome.com/docs/web-platform/view-transitions/cross-document#navigation-activation-info
   
 
-// Canvas API voor regenen aantal ballen in gescoorde doelpunten.
+// Canvas API voor regenen aantal ballen in gescoorde doelpunten, met behulp van chat.
   const canvas = document.getElementById('footballRain');
   const ctx = canvas.getContext('2d');
 
   let width, height;
   const footballs = [];
-  const footballCount = 30;
+  const teamGoalCount = document.querySelector('#scored');
+// select het element waarin id="scored" zich bevindt.
+  const footballCount = parseInt(teamGoalCount.textContent.trim(), 10);
+// Zet het om naar alleen de inhoud van de li, die vanuit de server ingevoerd wordt.
   const footballImage = new Image();
   footballImage.src = 'https://upload.wikimedia.org/wikipedia/commons/6/6e/Football_%28soccer_ball%29.svg';
+
+//console.log(teamGoalCount);
+// console.log(footballCount);
 
   function resize() {
     width = window.innerWidth;
@@ -104,6 +107,6 @@ function navigateWithTransition(event) {
   footballImage.onload = () => {
     animate();
     setTimeout(() => {
-      stopAnimation = true; // Let the balls freeze in place
-    }, 5000); // Stop after 5 seconds
+      stopAnimation = true; 
+    }, 5000); 
   };

@@ -62,7 +62,7 @@ app
       SerieAData: SerieAData,
       EuropaLeagueData: EuropaLeagueData, 
       matchesData: filteredMatches,
-      currentDate: currentDate
+      currentDate: currentDate,
     }));
   });
   
@@ -85,6 +85,11 @@ app
 
     // console.log(randomBackgroundImage);
 
+    const leagueStandings = await fetch(`https://www.thesportsdb.com/api/v1/json/690867/lookuptable.php?l=${teamData.teams[0].idLeague}&s=2024-2025`);
+    const leagueStandingsData = await leagueStandings.json()
+
+    // console.log(teamData.teams[0].idLeague)
+    
 
     const nextGame = await fetch('https://www.thesportsdb.com/api/v1/json/690867/eventsnext.php?id=' + teamData.teams[0].idTeam);
     const nextGameData = await nextGame.json(); 
@@ -94,7 +99,6 @@ app
 
     const lastFiveGames = playedMatchesData.results.slice(0, 5);
 
-    console.log(lastFiveGames);
 
     let gescoordeGoals = 0;
     let gescoordeTegenGoals = 0;
@@ -106,6 +110,20 @@ app
         gescoordeGoals += Number(game.intHomeScore);
         gescoordeTegenGoals += Number(game.intAwayScore);
       }
+    });
+
+    const gameResults = playedMatchesData.results.slice(0, 5).map(game => {
+      const isWin =
+        (game.strAwayTeam === teamData.teams[0].strTeam && Number(game.intAwayScore) > Number(game.intHomeScore)) ||
+        (game.strHomeTeam === teamData.teams[0].strTeam && Number(game.intHomeScore) > Number(game.intAwayScore));
+    
+      const isDraw = Number(game.intHomeScore) === Number(game.intAwayScore);
+    
+      return {
+        ...game,
+        isWin: isWin, // True if the game is a win
+        isDraw: isDraw, // True if the game is a draw
+      };
     });
 
     let gewonnenGames = 0;
@@ -124,7 +142,7 @@ app
     }
     );  
 
-    console.log(gewonnenGames)
+    // console.log(gewonnenGames)
 
 
     // console.log({gescoordeGoals})
@@ -136,13 +154,14 @@ app
         backgroundColour1: backgroundColour1,
         backgroundColour2: backgroundColour2,
         nextGame: nextGameData.events[0],   
-        lastFiveGames: lastFiveGames,
+        lastFiveGames: gameResults,
         randomBackgroundImage: randomBackgroundImage,
         gescoordeGoals: gescoordeGoals,
         gescoordeTegenGoals: gescoordeTegenGoals,
         gewonnenGames: gewonnenGames,
         gelijkSpelGames: gelijkSpelGames,
-        verlorenGames: verlorenGames  
+        verlorenGames: verlorenGames,
+        leagueStandings: leagueStandingsData, 
      })
     );
   });

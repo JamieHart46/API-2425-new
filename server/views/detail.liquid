@@ -2,10 +2,12 @@
 
 {% block content %}
 <body id="" style="background-image: url('{{ randomBackgroundImage }}'); background-position: center; background-size:100vw; background-repeat= no-repeat;">
+  <canvas id="footballRain"></canvas>
 <main>
   <section>
    <div class="titel" style="background-color: {{ backgroundColour1 }};"> 
-    <img src="{{ team.strBadge }}" view-transition-name="{{ team.strTeam | replace: " ", "-" }}">
+    {% comment %} <img src="{{ team.strBadge }}" view-transition-name="{{ team.strTeam | replace: " ", "-" }}"> {% endcomment %}
+    <img src="{{ team.strBadge }}" view-transition-name="PSV-Eindhoven">
     <h2><strong>{{ team.strTeam }}</strong></h2>  
    </div>
 
@@ -23,7 +25,11 @@
 
    <label style="background-color: {{ backgroundColour2 }};">Vorige resultaten</label>
    {% for game in lastFiveGames %}
-   <div class="resultDisplay">    
+   <div class="resultDisplay" style="background-color: 
+   {% if game.isWin %}rgb(51, 204, 51, 0.7) 
+   {% elsif game.isDraw %} rgb(140, 140, 140, 0.8); 
+   {% else %}rgb(255, 51, 0, 0.7)
+   {% endif %};">
       <img src="{{game.strHomeTeamBadge}}">
       <ul class="opkomendeWedstrijden">
         <li> {{ game.strHomeTeam }} vs {{ game.strAwayTeam }} </li>
@@ -40,12 +46,26 @@
 <label class="statLabel" style="background-color: {{ backgroundColour2 }};">Stats laatste 5 wedstrijden</label>
 <div id="statsLaatsteFive">
     <ul id="statsList">
-      <li class="stats"> Aantal gescoorde doelpunten: {{ gescoordeGoals }}</li>
-      <li class="stats"> Aantal doelpunten tegen: {{ gescoordeTegenGoals  }}</li>
-      <li class="stats"> Gewonnen: {{ gewonnenGames }} </li>
-      <li class="stats"> Gelijkspel: {{ gelijkSpelGames }} </li>
-      <li class="stats"> Verloren: {{ verlorenGames }} </li>
+      <li class="stats"> Aantal gescoorde doelpunten: </li>
+      <li class="stats"> Aantal doelpunten tegen:  </li>
+      <li class="stats"> Gewonnen:  </li>
+      <li class="stats"> Gelijkspel:  </li>
+      <li class="stats"> Verloren:  </li>
     </ul>
+
+    <ul id="statsList">
+      <li class="stats"> {{ gescoordeGoals }}</li>
+      <li class="stats"> {{ gescoordeTegenGoals  }}</li>
+      <li class="stats"> {{ gewonnenGames }} </li>
+      <li class="stats">{{ gelijkSpelGames }} </li>
+      <li class="stats"> {{ verlorenGames }} </li>
+    </ul>
+
+    <ol class="leagueStanding">
+      {% for team in leagueStandingData.teams %}
+      <li> {{ team.strTeam }} </li>
+      {% endfor %}
+    </ol>
     
   </div>
   </section>

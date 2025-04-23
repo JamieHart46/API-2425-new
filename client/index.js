@@ -39,8 +39,16 @@ function navigateWithTransition(event) {
   
 
 // Canvas API voor regenen aantal ballen in gescoorde doelpunten, met behulp van chat.
+document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('footballRain');
+  if (!canvas) {
+    console.error('Canvas element with id "footballRain" not found.');
+    console.log(canvas);
+    return;
+  }
   const ctx = canvas.getContext('2d');
+
+  
 
   let width, height;
   const footballs = [];
@@ -111,4 +119,5 @@ function navigateWithTransition(event) {
     setTimeout(() => {
       stopAnimation = true; 
     }, 5000); 
-  };
+  }
+} );

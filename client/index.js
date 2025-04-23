@@ -42,10 +42,10 @@ function navigateWithTransition(event) {
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('footballRain');
   if (!canvas) {
-    console.error('Canvas element with id "footballRain" not found.');
-    console.log(canvas);
-    return;
+    console.log('Canvas element not found. Skipping canvas-related code.');
+    return; // Exit if the canvas does not exist
   }
+
   const ctx = canvas.getContext('2d');
 
   

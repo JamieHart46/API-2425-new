@@ -78,6 +78,8 @@ app
     const team = await fetch('https://www.thesportsdb.com/api/v1/json/690867/searchteams.php?t=' + teamName);
     const teamData = await team.json();
 
+    console.log(teamData);
+
     // Primaire en secundaire kleuren van het team ophalen om te gebruiken voor de styling van de pagina.
     const backgroundColour1 = teamData.teams[0].strColour1;
     const backgroundColour2 = teamData.teams[0].strColour2;

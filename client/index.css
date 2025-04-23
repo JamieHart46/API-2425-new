@@ -131,7 +131,7 @@ li {
   padding: 0;
 }
 
-li:first-of-type {
+.stats li:first-of-type, .resultDisplay li:first-of-type, .leagueStanding li:first-of-type {
   font-weight: bold;
   background-color: rgb(42, 42, 42);
 
@@ -172,6 +172,8 @@ li:first-of-type {
 
   
   padding: .5em;
+  margin: .5em;
+  border: 1px solid white;
 }
 
 .leagueStanding {
@@ -181,7 +183,6 @@ li:first-of-type {
   grid-column: 2;
 
   margin: .5em;
-  margin-top: 0;
   border: 1px solid white;
 }
 
@@ -199,8 +200,8 @@ li:first-of-type {
 }
 
 img {
-  width: 3em;
-  height: 3em;
+  width: 4em;
+  height: 4em;
   margin: .5em;
 
   z-index: 20;
@@ -224,7 +225,7 @@ section:nth-of-type(2) {
 
 
 
-/* View transition API */
+/* View transition API , met hulp van Sanne*/
  @view-transition {
   navigation: auto;
 }
@@ -234,8 +235,8 @@ section:nth-of-type(2) {
 }
 
 #detailBadge {
-  width: 4.5em;
-  height: 4.5em;
+  width: 5em;
+  height: 5em;
 }
 
 html {

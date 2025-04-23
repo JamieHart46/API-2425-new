@@ -103,7 +103,9 @@ function navigateWithTransition(event) {
     });
     requestAnimationFrame(animate);
   }
+//   Zorgt ervoor dat de ballen na 5 seconden in beeld bevriezen en niet verdwijnen. met Chat
 
+//   Zorgt dat de animatie na 5 seonden stopt en deze niet constant blijft lopen.
   footballImage.onload = () => {
     animate();
     setTimeout(() => {

@@ -46,7 +46,7 @@
 
 <label class="statLabel" style="background-color: {{ backgroundColour2 }};">Stats laatste 5 wedstrijden</label>
 <div class="statsLaatsteFive">
-    <ul id="statsList">
+    <ul class="leagueStanding">
       <li class="stats"> Statistieken laatste vijf wedstrijden </li>
       <li class="stats"> Aantal gescoorde doelpunten: </li>
       <li class="stats"> Aantal doelpunten tegen:  </li>
@@ -66,14 +66,15 @@
   </div>
 
 
+  <label class="statLabel" style="background-color: {{ backgroundColour2 }};"> {{ team.strLeagueBadge }} {{team.strLeague}} </label>  
   <div class="statsLaatsteFive">
     <ol class="leagueStanding">
-  <li class="stats"> Competitie stand: {{ strLeague }} </li>
+  <li class="stats"> Competitie stand </li>
   {% for table in leagueStandingsData.table %}
     <li class="stand" 
         style="background-color: {% if table.isCurrentTeam %}rgb(51, 204, 51, 0.7){% else %}transparent{% endif %}; 
                font-weight: {% if table.isCurrentTeam %}bold{% else %}normal{% endif %};">
-      {{ table.intRank }} {{ table.strTeam }}
+      {{ table.intRank }}. {{ table.strTeam }}
     </li>
   {% endfor %}
 </ol>

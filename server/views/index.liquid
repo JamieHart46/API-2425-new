@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<main>
+<main style="background-color: white;">
 <section>
 
 <label class="teamListLabel">Wedstrijden van vandaag</label>
@@ -23,13 +23,19 @@
 <div>
  <label id="leagueTarget" class="teamListLabel">Eredivisie</label>
 <ul class="teamList">
-  {% for team in eredivisieData.teams %}
+  {% comment %} {% for team in eredivisieData.teams %}
     <li class="teams">
       <a class="clubs" href="/team/{{ team.strTeam | replace: " ", "_" }}" onclick="navigateWithTransition(event)">
-       <img src="{{ team.strBadge }}" view-transition-name="PSV-Eindhoven">
+       <img src="{{ team.strBadge }}">
       </a>
     </li>
-  {% endfor %}
+  {% endfor %} {% endcomment %}
+
+  <li class="teams">
+      <a href="/team/PSV_Eindhoven" onclick="navigateWithTransition(event)">
+       <img src="https://r2.thesportsdb.com/images/media/team/badge/xfsz6i1721297428.png">
+      </a>
+    </li>
 </ul>
 </div>
 

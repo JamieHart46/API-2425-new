@@ -1,26 +1,41 @@
 import './index.css';
 
-
-// View transition API voor overgang naar detail pagina.
+// Class geven aan img voor View transition
 function navigateWithTransition(event) {
     event.preventDefault();
   
-    const url = event.target.closest('a').href;
+    const link = event.currentTarget;
+    const img = link.querySelector('a img');
+
+    console.log('Clicked image:', img);
   
-    if (document.startViewTransition) {
-      document.startViewTransition(() => {
-        window.location.href = url;
-      });
-    } else {
-      window.location.href = url;
+    // Remove the class from all other images
+    document.querySelectorAll('.teamBadge').forEach(el => {
+      el.classList.remove('teamBadge');
+    });
+  
+    // Add the class to the clicked image
+    if (img) {
+      img.classList.add('teamBadge');
     }
+  
+    // Wait for the class to be added before navigating
+    new Promise((resolve) => {
+      // Check if the class is added
+      const checkClass = setInterval(() => {
+        if (img && img.classList.contains('teamBadge')) {
+          clearInterval(checkClass); // Stop checking
+          resolve(); // Resolve the promise
+        }
+      }, 10); // Check every 10ms
+    }).then(() => {
+      // Trigger the transition after the class is added
+      document.startViewTransition(() => {
+        window.location.href = link.href;
+      });
+    });
   }
   
-  document.querySelectorAll('a.clubs').forEach(link => {
-    link.addEventListener('click', navigateWithTransition);
-  });
-
-
 
 // Canvas API voor regenen aantal ballen in gescoorde doelpunten.
   const canvas = document.getElementById('footballRain');

@@ -12,6 +12,8 @@
 
 * {
   color: white;
+
+  overflow-x: clip;
 }
 
 canvas {
@@ -23,7 +25,7 @@ canvas {
 main {
   display: grid;
   grid-template-columns: 20vw 60vw 20vw;
-  position: relative;
+  /* position: relative; */
   z-index: 2;
 
   width: 100vw; 
@@ -41,6 +43,7 @@ main {
 
 section {
   background-color: rgb(240, 240, 240, 0.2);
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.3);
   width: 100%;
 }
 
@@ -173,6 +176,8 @@ img {
   width: 3em;
   height: 3em;
   margin: .5em;
+
+  z-index: 20;
 }
 
 #leagueBadge {
@@ -191,16 +196,20 @@ section:nth-of-type(2) {
   grid-column: 3; 
 }
 
-@view-transition {
+
+
+/* View transition API */
+ @view-transition {
   navigation: auto;
 }
 
-/* ::view-transition-group(root) {
-  animation-duration: 5s;
-} */
+.teamBadge {
+  view-transition-name: teamBadge;
+}
 
-::view-transition-group(PSV-Eindhoven) {
-  animation-duration: 5s;
+#detailBadge {
+  width: 4.5em;
+  height: 4.5em;
 }
 
 html {

@@ -1,4 +1,4 @@
-Interessante API's om te gebruiken. 
+# Interessante API's om te gebruiken. 
 
 WEB api's
 - vibration
@@ -10,8 +10,7 @@ WEB api's
 - picture in picture 
 - ink api
 
-- Share API voor delen wat er ingezet wordt.
-https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API
+- [Share API voor delen wat er ingezet wordt.](https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API)
 
 Content api's 
 - Youtube

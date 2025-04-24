@@ -1,4 +1,5 @@
 # API @cmda-minor-web 2024 - 2025
+
 Het web is een geweldige plek en de beschikbare technologieën ervan zijn vandaag de dag krachtiger dan ooit tevoren.
 De kracht van het web ligt in het feit dat het een platform is dat voor iedereen beschikbaar is en dat het gebaseerd is
 op open standaarden. De technologieën worden ontworpen en gespecificeerd op basis van consensus en zijn niet in handen

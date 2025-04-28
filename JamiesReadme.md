@@ -1,52 +1,43 @@
-Interessante API's om te gebruiken. 
+# Process verslag API - Jamie Hart
 
-WEB api's
-- vibration
-- Geolocation
-- Remote playback
-- localStorage
-- Fetch
-- touch events
-- picture in picture 
-- ink api
+In de eerste les hebben we in inventarisatie gedaan voor welke content en web API's interessant zouden zijn 
+om te gebruiken voor het vak. 
 
-- Share API voor delen wat er ingezet wordt.
-https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API
-
-Content api's 
-- Youtube
-- Weather
-- Shazam
-- ticketmaster
-- tripadvisor
-- trustpilot??
-- OpenAI
-- Polygon
-- spotify
-- API-football
+| Web API's                  | Content API's               
+|----------------------------|-----------------------
+| Vibration                  | Youtube
+| Geolocation                | Weather
+| Remote playback            | Shazam
+| localStorage               | ticketmaster       
+| Fetch                      | tripadvisor
+| touch events               | trustpilot
+| picture in picture         | OpenAI
+| Ink API                    | Polygon
+| Share API                  | Spotify
+|                            | [Football-data](https://www.thesportsdb.com/) 
 
 
-Week 1: Plan voor de site
+## Week 1: Plan voor de site
 
 Ik wil een pagina maken voor football wedstrijden en teams, waarbij je de aankomende wedstrijden kan zien, 
 maar ook teams tegenover elkaar kan zetten en statistieken kan vergelijken. 
 En voorgaande uitslagen per team in alle competities.
 
-De opmaak van de site veranderd aan de hand van welke teams er open staan en weke primaire kleuren deze teams hebben. 
+De opmaak van de site verandert aan de hand van welke teams er open staan en welke primaire kleuren deze teams hebben. 
 
 Idee om kaartjes voor de teams te maken om het visueel beter te maken kan ook nog.
 Gegevens uit Content API die ik minimaal wil gebruiken.
 - Team naam
 - Logo van het team
 - Kleuren van de club
-- 
+- uitslagen
 
 - Uitslagen van vorige wedstrijden
 - Aankomende wedstrijden
 - aantal gescoorde doelpunten en welke minuut etc. 
 
 
-Week 2: Data ophalen en styling
+## Week 2: Data ophalen en styling
 
 Deze week ben ik vooral gaan kijken naar de styling, van de pagina. Ik heb de titel Bet Helper eraan gegeven en de styling van TOTO.
 Ik heb besloten om op de detail pagina alle teams te weergeven en dan als daarop geklikt wordt de eerst volgende wedstrijd voor dat team en 
@@ -62,7 +53,7 @@ de juiste keuze te maken, door mensen te testen op wat zij denken dat de score g
 niet alleen in beeld brengen, maar gebruiken om een andere dingen te laten zien die helpen bij de bet zetten. 
 
 
-Week 3: API en Data gebruiken.
+## Week 3: API en Data gebruiken.
 
 Het is gelukt om de primaire kleuren van de clubs in liquid te gebruiken om de styling van de pagina aan te passen aan de hand van welk team er geselecteerd
 wordt door de gebruiker. Nu moet ik werken aan de Live wedstrijden op de index pagina te displayen en de aankomende wedstrijden op de detail pagina te zetten
@@ -82,7 +73,7 @@ Ik merk dat ik sinds deze week steeds meer begrijp hoe ik data ophaal en in de l
 meer vooruitgang dan de eerste 2 weken, maar ik weet nog niet of het genoeg is om aan alle eisen te voldoen.
 
 
-Week 4:
+## Week 4: Web API's en statistieken
 
 Deze laatste week moet ik nog de web api's kiezen en erin zetten en wil ik nog een aantal statistieken uit de football api halen en goed opstellen, 
 zoals gescoorde goals en tegen goals, gewonnen, gelijkspel en verloren in de laatste 5 wedstrijden, stand in de competitie, etc.

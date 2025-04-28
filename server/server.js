@@ -27,18 +27,17 @@ app
     const LaLiga = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=Spanish%20La%20Liga')
     const LaLigaData = await LaLiga.json()
 
-    const Bundesliga = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=German%20Bundesliga')
-    const BundesligaData = await Bundesliga.json()
-
-    const SerieA = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=Italian%20Serie%20A')
-    const SerieAData = await SerieA.json()
-
     const ChampionsLeague = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=UEFA%20Champions%20League')
     const ChampionsLeagueData = await ChampionsLeague.json()
 
     const EuropaLeague = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=UEFA%20Europa%20League')
     const EuropaLeagueData = await EuropaLeague.json()  
 
+    // const Bundesliga = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=German%20Bundesliga')
+    // const BundesligaData = await Bundesliga.json()
+
+    // const SerieA = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=Italian%20Serie%20A')
+    // const SerieAData = await SerieA.json()
 
     // Instellen om de wedstrijden met strDate gelijk aan dag van vandaag te filteren en te tonen op de index.liquid.
     // Met Chat
@@ -68,8 +67,6 @@ app
       BplData: BplData,
       ChampionsLeagueData: ChampionsLeagueData,
       LaLigaData: LaLigaData,
-      BundesligaData: BundesligaData,
-      SerieAData: SerieAData,
       EuropaLeagueData: EuropaLeagueData, 
       matchesData: filteredMatches,
       currentDate: currentDate,

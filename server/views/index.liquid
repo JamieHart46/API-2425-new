@@ -51,7 +51,7 @@
 <div>
 <label class="teamListLabel">Champions League</label>
 <ul class="teamList">
-  {% for teams in ChampionsLeagueData.teams %}
+  {% for team in ChampionsLeagueData.teams %}
     <li>
       <a class="clubs" href="/gegevens/{{ team.strTeam | replace: " ", "_"   }}">
       <img src="{{ team.strBadge }}">

@@ -14,8 +14,17 @@ header {
   display: flex;
 }
 
+header {
+  position: fixed;
+  height: 4em;
+
+  z-index: 4;
+}
+
 body {
   min-width: 0;
+
+  margin: 0;
 }
 
 h1 {

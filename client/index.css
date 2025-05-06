@@ -30,6 +30,10 @@ main {
 
   width: 100vw; 
   min-height: 100vh;
+
+}
+section {
+  margin-top: 5em;
 }
 
 .titel {
@@ -241,4 +245,12 @@ section:nth-of-type(2) {
 
 html {
   scroll-behavior: smooth;
+}
+
+#matches {
+  scroll-margin-top: 5em;
+}
+
+#leagueTarget {
+  scroll-margin-top: 3em;
 }

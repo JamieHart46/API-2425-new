@@ -5,7 +5,7 @@
 <main style="background-color: white;">
 <section>
 
-<label class="teamListLabel">Wedstrijden van vandaag</label>
+<label class="teamListLabel" id="matches">Wedstrijden van vandaag</label>
 {% for events in matchesData %}
    <div class="resultDisplay">    
     <img src="{{events.strHomeTeamBadge}}">
@@ -25,17 +25,12 @@
 <ul class="teamList">
   {% for team in eredivisieData.teams %}
     <li class="teams">
-      <a class="clubs" href="/team/{{ team.strTeam | replace: " ", "_" }}">
+      <a class="clubs" href="/gegevens/{{ team.strTeam | replace: " ", "_" }}">
        <img src="{{ team.strBadge }}">
       </a>
     </li>
   {% endfor %}
 
-  {% comment %} <li class="teams">
-      <a href="/team/PSV_Eindhoven" onclick="navigateWithTransition(event)">
-       <img src="https://r2.thesportsdb.com/images/media/team/badge/xfsz6i1721297428.png">
-      </a>
-    </li> {% endcomment %}
 </ul>
 </div>
 
@@ -45,7 +40,7 @@
 <ul class="teamList">
   {% for team in BplData.teams %}
     <li>
-      <a class="clubs" href="/team/{{ team.strTeam | replace: " ", "_"   }}">
+      <a class="clubs" href="/gegevens/{{ team.strTeam | replace: " ", "_"   }}">
       <img src="{{ team.strBadge }}">
       </a>
     </li>
@@ -56,9 +51,9 @@
 <div>
 <label class="teamListLabel">Champions League</label>
 <ul class="teamList">
-  {% for team in ChampionsLeagueData.teams %}
+  {% for teams in ChampionsLeagueData.teams %}
     <li>
-      <a class="clubs" href="/team/{{ team.strTeam | replace: " ", "_"   }}">
+      <a class="clubs" href="/gegevens/{{ team.strTeam | replace: " ", "_"   }}">
       <img src="{{ team.strBadge }}">
       </a>
     </li>
@@ -72,7 +67,7 @@
 <ul class="teamList">
   {% for team in EuropaLeagueData.teams %}
     <li>
-      <a class="clubs" href="/team/{{ team.strTeam | replace: " ", "_"   }}">
+      <a class="clubs" href="/gegevens/{{ team.strTeam | replace: " ", "_"   }}">
       <img src="{{ team.strBadge }}">
       </a>
     </li>

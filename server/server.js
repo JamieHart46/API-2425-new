@@ -2,20 +2,24 @@ import { App } from '@tinyhttp/app';
 import { logger } from '@tinyhttp/logger';
 import { Liquid } from 'liquidjs';
 import sirv from 'sirv';
-
+// Importeerd de modules die nodig zijn vooor gebruik van de tinyhttp server, liquidjs en css en javascript 
 
 const engine = new Liquid({
   extname: '.liquid',
 });
+// Maakt een nieuwe liquid engine aan met de extensie .liquid, zodat de templates gebruikt kunnen worden
 
 const app = new App();
+// Maakt een nieuwe app aan met de tinyhttp server, of maakt een server aan waar de app op draait
 
 app
   .use(logger())
   .use('/', sirv('dist'))
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
+  // Voegt de logger en sirv toe zodat die op de server beschikbaar zijn.
 
 
+  // Set de route voor de data naar de base pagina of de home pagina. Het begin punt als iemand de pagina opent.
   // Data ophalen van de competities uit de API. Eerste met hulp van Cyd, rest zelf.
   app.get('/', async (req, res) => {
     const eredivisie = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=Dutch%20Eredivisie')
@@ -33,11 +37,6 @@ app
     const EuropaLeague = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=UEFA%20Europa%20League')
     const EuropaLeagueData = await EuropaLeague.json()  
 
-    // const Bundesliga = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=German%20Bundesliga')
-    // const BundesligaData = await Bundesliga.json()
-
-    // const SerieA = await fetch('https://www.thesportsdb.com/api/v1/json/690867/search_all_teams.php?l=Italian%20Serie%20A')
-    // const SerieAData = await SerieA.json()
 
     // Instellen om de wedstrijden met strDate gelijk aan dag van vandaag te filteren en te tonen op de index.liquid.
     // Met Chat
@@ -62,23 +61,27 @@ app
 
 
    return res.send(renderTemplate('server/views/index.liquid', 
-    { title: 'Competities', 
-      eredivisieData: eredivisieData, 
+    { title: 'Competities',  
+      eredivisieData: eredivisieData,
       BplData: BplData,
-      ChampionsLeagueData: ChampionsLeagueData,
       LaLigaData: LaLigaData,
-      EuropaLeagueData: EuropaLeagueData, 
+      ChampionsLeagueData: ChampionsLeagueData,
+      EuropaLeagueData: EuropaLeagueData,
       matchesData: filteredMatches,
       currentDate: currentDate,
     }));
   });
   
-  app.get('/team/:strTeam/', async (req, res) => {
+
+  // Maakt de route van de data aan. zet wat er tussen de / staat achter de url en stuurt het daarheen.
+  // De dubbele punt geeft aan dat alles erachter variabel is.
+  // Het stukje gegevens kan verandert worden maar moet dan ook aangepast worden in de href in de index.liquid
+  app.get('/gegevens/:strTeam/', async (req, res) => {
     const teamName = req.params.strTeam;
     const team = await fetch('https://www.thesportsdb.com/api/v1/json/690867/searchteams.php?t=' + teamName);
     const teamData = await team.json();
 
-    console.log(teamData);
+    // console.log(teamData);
 
     // Primaire en secundaire kleuren van het team ophalen om te gebruiken voor de styling van de pagina.
     const backgroundColour1 = teamData.teams[0].strColour1;

@@ -152,8 +152,8 @@ app
     
       return {
         ...game,
-        isWin: isWin, // True if the game is a win
-        isDraw: isDraw, // True if the game is a draw
+        isWin: isWin, // True als de wedstrijd winst was
+        isDraw: isDraw, // True als de wedstrijd gelijkspel was
       };
     });
 
@@ -198,47 +198,6 @@ app
      })
     );
   });
-
-
-
-  
-    
-//  APIKEY FOR SPORTSDB: 690867
-
-
-
-  // app.get('/', async (req, res) => {
-  //   const matches = await fetch('https://api.football-data.org/v4/competitions/PL/matches?status=TIMED', {
-  //     headers: {
-  //       'X-Auth-Token': '56a8563e25f64b1ab1a80730db11b4b4',
-  //     },
-  //   });
-  //   const matchesData = await matches.json();
-  //   console.log(matchesData);
-  // });
-
-
-
-
-    
-    
-    // const otherApi = await fetch('http://api.football-data.org/v4/competitions/2003/matches?matchday=1')
-
-    // const matches = async () => {
-    //   const url = 'http://api.football-data.org/v4/competitions/2003/matches?matchday=1';
-    //   try {
-    //     const response = await fetch(url)
-    //     if (!response.ok) {
-    //       throw new Error(`HTTP error! status: ${response.status}`);
-    //     }
-
-    //     const jsonData = await response.json();
-    //     console.log('JSON data:', jsonData);
-    //     return jsonData;
-    //   } catch (error) {
-    //     console.error('Error fetching data:', error);
-    //   }
-    // } 
   
   const renderTemplate = (template, data) => {
     const templateData = {
@@ -248,7 +207,7 @@ app
   
     return engine.renderFileSync(template, templateData);
   };
-
+// renderFileSync neemt de Data en de template en geeft het door als HTML wat in de browser weergeven kan worden.
 
 
   
